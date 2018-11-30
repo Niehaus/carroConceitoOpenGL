@@ -11,7 +11,7 @@
 #define COR_DO_PLANO 0.52,0.52,0.78,1.0
 #define COR_DO_AVIAO 0.3,0.52,0.18,1.0
 #define TEXTURA_DO_PLANO "montanhas.png"
-#define TEXTURA_DO_AVIAO "camuflagem.png"
+#define TEXTURA_DO_AVIAO "ladybug.png"
 
 
 GLint WIDTH =1000;
@@ -155,9 +155,10 @@ void compoe_jato(void){
     glTranslatef(0.9,2.4,2.3);
     glRotatef(68,1,0,0);
     quadric = gluNewQuadric();
-    glColor3f(0,0,0);
+
     //gluQuadricTexture(quadric, GL_TRUE);
     gluCylinder(quadric, 0.1, 0.1, 2.5, 12, 3);
+    glColor3f(0,0,0);
   glPopMatrix();
 
   glPushMatrix(); // Lateral dos vidro ESQUERDA
