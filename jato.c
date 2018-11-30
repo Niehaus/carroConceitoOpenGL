@@ -14,8 +14,8 @@
 #define TEXTURA_DO_AVIAO "camuflagem.png"
 
 
-GLint WIDTH =800;
-GLint HEIGHT=600;
+GLint WIDTH =1000;
+GLint HEIGHT=700;
 
 GLfloat obs[3]={0.0,7.0,0.0};
 GLfloat look[3]={0.0,3.0,0.0};
@@ -24,7 +24,7 @@ GLuint  textura_aviao;
 
 GLshort texturas=1;
 GLfloat tetaxz=0;
-GLfloat raioxz=6;
+GLfloat raioxz=10;
 GLuint  jato;
 
 GLfloat ctp[4][2]={
@@ -91,62 +91,207 @@ void compoe_jato(void){
   glTranslatef(0,0,4);
   //gluCylinder(quadric, 1, 1.5, 1.5, 12, 3);
   glBegin(GL_QUADS); //PARTE DA FRENTE DO PARACHOQUE
-    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 0.1f, 1.0f);
-    glTexCoord2fv(ctp[1]);  glVertex3f(-1.0f, 0.1f, 1.0f);
-    glTexCoord2fv(ctp[2]);  glVertex3f(-1.0f, -1.0f,  1.0f);
-    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f, -1.0f,  1.0f);
+    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 0.1f, 2.0f);
+    glTexCoord2fv(ctp[1]);  glVertex3f(-2.0f, 0.1f, 2.0f);
+    glTexCoord2fv(ctp[2]);  glVertex3f(-2.0f,-1.0f, 2.0f);
+    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-1.0f, 2.0f);
     glEnd();
   glPopMatrix();
 
   glPushMatrix(); //PARTE DE CIMA DO PARACHOQUE
-  glTranslatef(0,-0.9,4);
+  glTranslatef(0,-0.9,3.75);
   glBegin(GL_QUADS);
-    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f, -1.0f);
-    glTexCoord2fv(ctp[1]);  glVertex3f(-1.0f, 1.0f, -1.0f);
-    glTexCoord2fv(ctp[2]);  glVertex3f(-1.0f, 1.0f,  1.0f);
-    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f, 1.0f,  1.0f);
+    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f, -0.75f);
+    glTexCoord2fv(ctp[1]);  glVertex3f(-2.0f, 1.0f, -0.75f);
+    glTexCoord2fv(ctp[2]);  glVertex3f(-2.0f, 1.0f,  2.25f);
+    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f, 1.0f,  2.25f);
   glEnd();
   glPopMatrix();
 
   glPushMatrix();//ESQUERDA DO PARACHOQUE
-  glTranslatef(0,-0.9,4);
+  glTranslatef(0,-0.9,5.25);
   glBegin(GL_QUADS);
-    glTexCoord2fv(ctp[0]);  glVertex3f( -1.0f, 1.0f, 1.0f);
-    glTexCoord2fv(ctp[1]);  glVertex3f(-1.0f, 1.0f, -1.0f);
-    glTexCoord2fv(ctp[2]);  glVertex3f(-1.0f, -0.1f,  -1.0f);
-    glTexCoord2fv(ctp[3]);  glVertex3f( -1.0f, -0.1f,  1.0f);
+    glTexCoord2fv(ctp[0]);  glVertex3f(-2.0f, 1.0f, 0.75f);
+    glTexCoord2fv(ctp[1]);  glVertex3f(-2.0f, 1.0f,-0.75f);
+    glTexCoord2fv(ctp[2]);  glVertex3f(-2.0f,-0.1f,-0.75f);
+    glTexCoord2fv(ctp[3]);  glVertex3f(-2.0f,-0.1f, 0.75f);
   glEnd();
   glPopMatrix();
 
   glPushMatrix();//DIREITA DO PARACHOQUE
-  glTranslatef(0,-0.9,4);
+  glTranslatef(0,-0.9,5.25);
   glBegin(GL_QUADS);
-    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f, -1.0f);
-    glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 1.0f);
-    glTexCoord2fv(ctp[2]);  glVertex3f( 1.0f, -0.1f, 1.0f);
-    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f, -0.1f,  -1.0f);
+    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f,-0.75f);
+    glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 0.75f);
+    glTexCoord2fv(ctp[2]);  glVertex3f( 1.0f,-0.1f, 0.75f);
+    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-0.1f,-0.75f);
   glEnd();
   glPopMatrix();
 
+  glPushMatrix();//DIREITA DA LATERAL
+  glTranslatef(2,-0.4,3.75);
+  glBegin(GL_QUADS);
+    glTexCoord2fv(ctp[0]);  glVertex3f(-1.0f, 0.5f, 0.75f);
+    glTexCoord2fv(ctp[1]);  glVertex3f(-1.0f, 0.5f,-0.75f);
+    glTexCoord2fv(ctp[2]);  glVertex3f(-1.0f,-0.1f,-0.75f);
+    glTexCoord2fv(ctp[3]);  glVertex3f(-1.0f,-0.1f, 0.75f);
+  glEnd();
+  glPopMatrix();
+
+  glPushMatrix();//ESQUEDA DA LATERAL
+  glTranslatef(-1,-0.4,3.75);
+  glBegin(GL_QUADS);
+    glTexCoord2fv(ctp[0]);  glVertex3f(-1.0f, 0.5f, 0.75f);
+    glTexCoord2fv(ctp[1]);  glVertex3f(-1.0f, 0.5f,-0.75f);
+    glTexCoord2fv(ctp[2]);  glVertex3f(-1.0f,-0.1f,-0.75f);
+    glTexCoord2fv(ctp[3]);  glVertex3f(-1.0f,-0.1f, 0.75f);
+  glEnd();
+  glPopMatrix();
+
+  // -------------------------------------------
+  // VIDROS
+
+  glPushMatrix(); // Lateral dos vidro direita
+    glTranslatef(0.9,2.4,2.3);
+    glRotatef(68,1,0,0);
+    quadric = gluNewQuadric();
+    glColor3f(0,0,0);
+    //gluQuadricTexture(quadric, GL_TRUE);
+    gluCylinder(quadric, 0.1, 0.1, 2.5, 12, 3);
+  glPopMatrix();
+
+  glPushMatrix(); // Lateral dos vidro ESQUERDA
+    glTranslatef(-1.9,2.4,2.3);
+    glRotatef(68,1,0,0);
+    quadric = gluNewQuadric();
+    glColor3f(0,0,0);
+    //gluQuadricTexture(quadric, GL_TRUE);
+    gluCylinder(quadric, 0.1, 0.1, 2.5, 12, 3);
+  glPopMatrix();
+
+  glPushMatrix(); // PARTE DE CIMA DO VIDRO FRENTE
+    glTranslatef(-1.9,2.4,2.3);
+    glRotatef(90,0,1,0);
+    quadric = gluNewQuadric();
+    glColor3f(0,0,0);
+    //gluQuadricTexture(quadric, GL_TRUE);
+    gluCylinder(quadric, 0.1, 0.1, 2.8, 12, 3);
+  glPopMatrix();
+
+  glPushMatrix(); // CIMA DO VIDRO ESQUERDA
+    glTranslatef(-1.9,2.4,-0.1);
+    glRotatef(0,1,0,0);
+    quadric = gluNewQuadric();
+    glColor3f(0,0,0);
+    //gluQuadricTexture(quadric, GL_TRUE);
+    gluCylinder(quadric, 0.1, 0.1, 2.5, 12, 3);
+  glPopMatrix();
+
+  glPushMatrix(); // CIMA DO VIDRO DIREITA
+    glTranslatef(0.9,2.4,-0.1);
+    glRotatef(0,1,0,0);
+    quadric = gluNewQuadric();
+    glColor3f(0,0,0);
+    //gluQuadricTexture(quadric, GL_TRUE);
+    gluCylinder(quadric, 0.1, 0.1, 2.5, 12, 3);
+  glPopMatrix();
+
+  glPushMatrix(); // PARTE DE CIMA DO VIDRO TRAZEIRA
+    glTranslatef(-1.9,2.4,0);
+    glRotatef(90,0,1,0);
+    quadric = gluNewQuadric();
+    glColor3f(0,0,0);
+    //gluQuadricTexture(quadric, GL_TRUE);
+    gluCylinder(quadric, 0.1, 0.1, 2.8, 12, 3);
+  glPopMatrix();
+
+  glPushMatrix(); // Lateral dos vidro direita
+    glTranslatef(0.9,0.1,-1);
+    glRotatef(-68,1,0,0);
+    quadric = gluNewQuadric();
+    glColor3f(0,0,0);
+    //gluQuadricTexture(quadric, GL_TRUE);
+    gluCylinder(quadric, 0.1, 0.1, 2.5, 12, 3);
+  glPopMatrix();
+
+  glPushMatrix(); // Lateral dos vidro ESQUERDA
+    glTranslatef(-1.9,0.1,-1);
+    glRotatef(-68,1,0,0);
+    quadric = gluNewQuadric();
+    glColor3f(0,0,0);
+    //gluQuadricTexture(quadric, GL_TRUE);
+    gluCylinder(quadric, 0.1, 0.1, 2.5, 12, 3);
+  glPopMatrix();
+
+  // ---------------------------------------
+  // PARTE TRASEIRA DO CARRO
 
   glPushMatrix(); //PARTE DE CIMA DO PARACHOQUE
-  glTranslatef(0,0,2);
-  glRotatef(45,1,0,0);
+  glTranslatef(0,-0.9,-3.1);
   glBegin(GL_QUADS);
-    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f, -1.0f);
-    glTexCoord2fv(ctp[1]);  glVertex3f(-1.0f, 1.0f, -1.0f);
-    glTexCoord2fv(ctp[2]);  glVertex3f(-1.0f, 1.0f,  1.0f);
-    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f, 1.0f,  1.0f);
+    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f, -0.75f);
+    glTexCoord2fv(ctp[1]);  glVertex3f(-2.0f, 1.0f, -0.75f);
+    glTexCoord2fv(ctp[2]);  glVertex3f(-2.0f, 1.0f,  2.25f);
+    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f, 1.0f,  2.25f);
   glEnd();
   glPopMatrix();
 
+  glPushMatrix();//DIREITA DA LATERAL
+  glTranslatef(2,-0.4,-1.55);
+  glBegin(GL_QUADS);
+    glTexCoord2fv(ctp[0]);  glVertex3f(-1.0f, 0.5f, 0.7f);
+    glTexCoord2fv(ctp[1]);  glVertex3f(-1.0f, 0.5f,-0.7f);
+    glTexCoord2fv(ctp[2]);  glVertex3f(-1.0f,-0.1f,-0.7f);
+    glTexCoord2fv(ctp[3]);  glVertex3f(-1.0f,-0.1f, 0.7f);
+  glEnd();
+  glPopMatrix();
+
+  glPushMatrix();//ESQUEDA DA LATERAL
+  glTranslatef(-1,-0.4,-1.55);
+  glBegin(GL_QUADS);
+    glTexCoord2fv(ctp[0]);  glVertex3f(-1.0f, 0.5f, 0.7f);
+    glTexCoord2fv(ctp[1]);  glVertex3f(-1.0f, 0.5f,-0.7f);
+    glTexCoord2fv(ctp[2]);  glVertex3f(-1.0f,-0.1f,-0.7f);
+    glTexCoord2fv(ctp[3]);  glVertex3f(-1.0f,-0.1f, 0.7f);
+  glEnd();
+  glPopMatrix();
+
+  glPushMatrix();//ESQUERDA DA LATERAL TRASEIRA
+  glTranslatef(0,-0.9,-3.05);
+  glBegin(GL_QUADS);
+    glTexCoord2fv(ctp[0]);  glVertex3f(-2.0f, 1.0f, 0.8f);
+    glTexCoord2fv(ctp[1]);  glVertex3f(-2.0f, 1.0f,-0.8f);
+    glTexCoord2fv(ctp[2]);  glVertex3f(-2.0f,-0.1f,-0.8f);
+    glTexCoord2fv(ctp[3]);  glVertex3f(-2.0f,-0.1f, 0.8f);
+  glEnd();
+  glPopMatrix();
+
+  glPushMatrix();//DIREITA DA LATERAL TRASEIRA
+  glTranslatef(0,-0.9,-3.05);
+  glBegin(GL_QUADS);
+    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f,-0.8f);
+    glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 0.8f);
+    glTexCoord2fv(ctp[2]);  glVertex3f( 1.0f,-0.1f, 0.8f);
+    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-0.1f,-0.8f);
+  glEnd();
+  glPopMatrix();
+
+  glPushMatrix();
+  glTranslatef(0,0,-5.85);
+  glBegin(GL_QUADS); //PARTE DA FRENTE DO PARACHOQUE
+    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 0.1f, 2.0f);
+    glTexCoord2fv(ctp[1]);  glVertex3f(-2.0f, 0.1f, 2.0f);
+    glTexCoord2fv(ctp[2]);  glVertex3f(-2.0f,-1.0f, 2.0f);
+    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-1.0f, 2.0f);
+    glEnd();
+  glPopMatrix();
   /* cauda */
-  glBegin(GL_POLYGON);
+    /*glBegin(GL_POLYGON);
   glTexCoord2fv(cta[0]); glVertex3fv(cauda[0]);
   glTexCoord2fv(cta[1]); glVertex3fv(cauda[1]);
   glTexCoord2fv(cta[2]); glVertex3fv(cauda[2]);
   glTexCoord2fv(cta[3]); glVertex3fv(cauda[3]);
-  glEnd();
+  glEnd();*/
 
   //rodas
   quadric = gluNewQuadric();
@@ -183,7 +328,25 @@ void display(void){
   obs[2]=raioxz*sin(2*PI*tetaxz/360);
   gluLookAt(obs[0],obs[1],obs[2],look[0],look[1],look[2],0.0,1.0,0.0);
 
-  /* habilita/desabilita uso de texturas*/
+  /* habilita/desabilita usoglPushMatrix();//DIREITA DA LATERAL
+  glTranslatef(2,-0.4,3.75);
+  glBegin(GL_QUADS);
+    glTexCoord2fv(ctp[0]);  glVertex3f(-1.0f, 0.5f, 0.75f);
+    glTexCoord2fv(ctp[1]);  glVertex3f(-1.0f, 0.5f,-0.75f);
+    glTexCoord2fv(ctp[2]);  glVertex3f(-1.0f,-0.1f,-0.75f);
+    glTexCoord2fv(ctp[3]);  glVertex3f(-1.0f,-0.1f, 0.75f);
+  glEnd();
+  glPopMatrix();
+
+  glPushMatrix();//ESQUEDA DA LATERAL
+  glTranslatef(-1,-0.4,3.75);
+  glBegin(GL_QUADS);
+    glTexCoord2fv(ctp[0]);  glVertex3f(-1.0f, 0.5f, 0.75f);
+    glTexCoord2fv(ctp[1]);  glVertex3f(-1.0f, 0.5f,-0.75f);
+    glTexCoord2fv(ctp[2]);  glVertex3f(-1.0f,-0.1f,-0.75f);
+    glTexCoord2fv(ctp[3]);  glVertex3f(-1.0f,-0.1f, 0.75f);
+  glEnd();
+  glPopMatrix(); de texturas*/
   if(texturas){
     glEnable(GL_TEXTURE_2D);
   }
