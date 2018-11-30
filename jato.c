@@ -4,7 +4,9 @@
 #include <GL/glut.h>
 #include "png_texture.h"
 
-#define PI 3.1415
+//#define PI 3.1415
+const float PI = 3.14;
+const float DEG2RAD = 3.14159/180;
 
 #define COORD_TEXTURA_PLANO 1.0
 #define COORD_TEXTURA_AVIAO 1.0
@@ -26,6 +28,8 @@ GLshort texturas=1;
 GLfloat tetaxz=0;
 GLfloat raioxz=10;
 GLuint  jato;
+GLuint theTorus;
+
 
 GLfloat ctp[4][2]={
   {-COORD_TEXTURA_PLANO,-COORD_TEXTURA_PLANO},
@@ -50,6 +54,30 @@ void reshape(int width, int height){
   glLoadIdentity();
   gluPerspective(70.0,width/(float)height,0.1,30.0);
   glMatrixMode(GL_MODELVIEW);
+}
+
+
+static void torus(int numc, int numt)
+{
+   int i, j, k;
+   double s, t, x, y, z, twopi;
+
+   twopi = 2 * PI;
+   for (i = 0; i < numc; i++) {
+      glBegin(GL_QUAD_STRIP);
+      for (j = 0; j <= numt; j++) {
+         for (k = 1; k >= 0; k--) {
+            s = (i + k) % numc + 0.5;
+            t = j % numt;
+
+            x = (1+.1*cos(s*twopi/numc))*cos(t*twopi/numt);
+            y = (1+.1*cos(s*twopi/numc))*sin(t*twopi/numt);
+            z = .1 * sin(s * twopi / numc);
+            glVertex3f(x, y, z);
+         }
+      }
+      glEnd();
+   }
 }
 
 void compoe_jato(void){
@@ -294,7 +322,18 @@ void compoe_jato(void){
   glTexCoord2fv(cta[3]); glVertex3fv(cauda[3]);
   glEnd();*/
 
-  //rodas
+// ---------------------------------
+//rodas
+  // Volante
+  glTranslatef(0,0,2.8);
+  theTorus = glGenLists (2);
+  glNewList(theTorus, GL_COMPILE);
+  torus(4, 25);
+  glTranslatef(1,-1,0);
+  glRotatef(90,0,1,0);
+  torus(9500, 25);
+  glEndList();
+
   quadric = gluNewQuadric();
   gluQuadricTexture(quadric,GL_TRUE);
   glPushMatrix();
@@ -454,6 +493,7 @@ void init(){
   glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
   carregar_texturas();
   compoe_jato();
+
   //  glShadeModel(GL_FLAT);
   glEnable(GL_TEXTURE_2D);
 }
