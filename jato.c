@@ -12,7 +12,7 @@ const float DEG2RAD = 3.14159/180;
 #define COORD_TEXTURA_AVIAO 1.0
 #define COR_DO_PLANO 0.52,0.52,0.78,1.0
 #define COR_DO_AVIAO 0.3,0.52,0.18,1.0
-#define TEXTURA_DO_PLANO "dunas.png"
+#define TEXTURA_DO_PLANO "montanhas.png"
 #define TEXTURA_DO_AVIAO "ladybug.png"
 
 
@@ -62,7 +62,7 @@ static void torus(int numc, int numt)
    int i, j, k;
    double s, t, x, y, z, twopi;
 
-   twopi = 2 * PI;
+   twopi = 2* PI;
    for (i = 0; i < numc; i++) {
       glBegin(GL_QUAD_STRIP);
       for (j = 0; j <= numt; j++) {
@@ -117,7 +117,6 @@ void compoe_jato(void){
   glBindTexture(GL_TEXTURE_2D,textura_aviao);
   glPushMatrix();
   glTranslatef(0,0,4);
-  //gluCylinder(quadric, 1, 1.5, 1.5, 12, 3);
   glBegin(GL_QUADS); //PARTE DA FRENTE DO PARACHOQUE
     glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 0.1f, 2.0f);
     glTexCoord2fv(ctp[1]);  glVertex3f(-2.0f, 0.1f, 2.0f);
@@ -183,8 +182,6 @@ void compoe_jato(void){
     glTranslatef(0.9,2.4,2.3);
     glRotatef(68,1,0,0);
     quadric = gluNewQuadric();
-
-    //gluQuadricTexture(quadric, GL_TRUE);
     gluCylinder(quadric, 0.1, 0.1, 2.5, 12, 3);
     glColor3f(0,0,0);
   glPopMatrix();
@@ -228,7 +225,6 @@ void compoe_jato(void){
     glRotatef(90,0,1,0);
     quadric = gluNewQuadric();
     glColor3f(0,0,0);
-    //gluQuadricTexture(quadric, GL_TRUE);
     gluCylinder(quadric, 0.1, 0.1, 2.8, 12, 3);
   glPopMatrix();
 
@@ -237,7 +233,6 @@ void compoe_jato(void){
     glRotatef(-68,1,0,0);
     quadric = gluNewQuadric();
     glColor3f(0,0,0);
-    //gluQuadricTexture(quadric, GL_TRUE);
     gluCylinder(quadric, 0.1, 0.1, 2.5, 12, 3);
   glPopMatrix();
 
@@ -246,8 +241,43 @@ void compoe_jato(void){
     glRotatef(-68,1,0,0);
     quadric = gluNewQuadric();
     glColor3f(0,0,0);
-    //gluQuadricTexture(quadric, GL_TRUE);
     gluCylinder(quadric, 0.1, 0.1, 2.5, 12, 3);
+  glPopMatrix();
+
+  // ---------------------------------------
+  // PORTA
+
+  glPushMatrix(); // LATERAL DIREITA DA PORTA
+    glTranslatef(1.0, 0.1, 2.95);
+    glRotatef(90,1,0,0);
+    quadric = gluNewQuadric();
+    gluCylinder(quadric, 0.05, 0.05, 1.2, 12, 3);
+    glColor3f(0,0,0);
+  glPopMatrix();
+
+  glPushMatrix(); // PARTE DEBAIXO DA PORTA
+    glTranslatef(1.0, -1.06, -0.7);
+    quadric = gluNewQuadric();
+    gluCylinder(quadric, 0.05, 0.05, 3.6, 12, 3);
+    glColor3f(0,0,0);
+  glPopMatrix();
+
+  glPushMatrix(); // LATERAL DIREITA DA PORTA 2
+    glTranslatef(1.0, 0.1, -0.7);
+    glRotatef(90,1,0,0);
+    quadric = gluNewQuadric();
+    gluCylinder(quadric, 0.05, 0.05, 1.2, 12, 3);
+    glColor3f(0,0,0);
+  glPopMatrix();
+
+  glPushMatrix();//PORTA DIREITA
+  glTranslatef(0,-0.9,1.25);
+  glBegin(GL_QUADS);
+    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f,-1.55f);
+    glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 1.55f);
+    glTexCoord2fv(ctp[2]);  glVertex3f( 1.0f,-0.1f, 1.55f);
+    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-0.1f,-1.55f);
+  glEnd();
   glPopMatrix();
 
   // ---------------------------------------
@@ -266,20 +296,20 @@ void compoe_jato(void){
   glPushMatrix();//DIREITA DA LATERAL
   glTranslatef(2,-0.4,-1.55);
   glBegin(GL_QUADS);
-    glTexCoord2fv(ctp[0]);  glVertex3f(-1.0f, 0.5f, 0.7f);
-    glTexCoord2fv(ctp[1]);  glVertex3f(-1.0f, 0.5f,-0.7f);
-    glTexCoord2fv(ctp[2]);  glVertex3f(-1.0f,-0.1f,-0.7f);
-    glTexCoord2fv(ctp[3]);  glVertex3f(-1.0f,-0.1f, 0.7f);
+    glTexCoord2fv(ctp[0]);  glVertex3f(-1.0f, 0.5f, 0.9f);
+    glTexCoord2fv(ctp[1]);  glVertex3f(-1.0f, 0.5f,-0.9f);
+    glTexCoord2fv(ctp[2]);  glVertex3f(-1.0f,-0.1f,-0.9f);
+    glTexCoord2fv(ctp[3]);  glVertex3f(-1.0f,-0.1f, 0.9f);
   glEnd();
   glPopMatrix();
 
   glPushMatrix();//ESQUEDA DA LATERAL
   glTranslatef(-1,-0.4,-1.55);
   glBegin(GL_QUADS);
-    glTexCoord2fv(ctp[0]);  glVertex3f(-1.0f, 0.5f, 0.7f);
-    glTexCoord2fv(ctp[1]);  glVertex3f(-1.0f, 0.5f,-0.7f);
-    glTexCoord2fv(ctp[2]);  glVertex3f(-1.0f,-0.1f,-0.7f);
-    glTexCoord2fv(ctp[3]);  glVertex3f(-1.0f,-0.1f, 0.7f);
+    glTexCoord2fv(ctp[0]);  glVertex3f(-1.0f, 0.5f, 0.9f);
+    glTexCoord2fv(ctp[1]);  glVertex3f(-1.0f, 0.5f,-0.9f);
+    glTexCoord2fv(ctp[2]);  glVertex3f(-1.0f,-0.1f,-0.9f);
+    glTexCoord2fv(ctp[3]);  glVertex3f(-1.0f,-0.1f, 0.9f);
   glEnd();
   glPopMatrix();
 
@@ -320,23 +350,23 @@ void compoe_jato(void){
   glTexCoord2fv(cta[3]); glVertex3fv(cauda[3]);
   glEnd();*/
 
-// ---------------------------------
-//rodas
+  // ---------------------------------
+
   // Volante
-  glTranslatef(0,0,2.8);
+  /*glTranslatef(0,0,2.8);
   theTorus = glGenLists (2);
   glNewList(theTorus, GL_COMPILE);
   torus(4, 25);
-  glTranslatef(1,-1,0);
-  glRotatef(90,0,1,0);
-  torus(9500, 25);
+  //glTranslatef(1,-1,0);
+  //glRotatef(90,0,1,0);
+  //torus(9500, 25);
   glEndList();
 
   quadric = gluNewQuadric();
   gluQuadricTexture(quadric,GL_TRUE);
   glPushMatrix();
   glTranslatef(2,0,4);
-  glPopMatrix();
+  glPopMatrix();*/
 
   /* cabine do piloto */
 //  glTranslatef(0,1,3.5);
