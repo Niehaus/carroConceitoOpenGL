@@ -12,7 +12,7 @@ const float DEG2RAD = 3.14159/180;
 #define COORD_TEXTURA_AVIAO 1.0
 #define COR_DO_PLANO 0.52,0.52,0.78,1.0
 #define COR_DO_AVIAO 0.3,0.52,0.18,1.0
-#define TEXTURA_DO_PLANO "montanhas.png"
+#define TEXTURA_DO_PLANO "dunas.png"
 #define TEXTURA_DO_AVIAO "ladybug.png"
 
 
@@ -212,7 +212,6 @@ void compoe_jato(void){
     glRotatef(0,1,0,0);
     quadric = gluNewQuadric();
     glColor3f(0,0,0);
-    //gluQuadricTexture(quadric, GL_TRUE);
     gluCylinder(quadric, 0.1, 0.1, 2.5, 12, 3);
   glPopMatrix();
 
@@ -221,7 +220,6 @@ void compoe_jato(void){
     glRotatef(0,1,0,0);
     quadric = gluNewQuadric();
     glColor3f(0,0,0);
-    //gluQuadricTexture(quadric, GL_TRUE);
     gluCylinder(quadric, 0.1, 0.1, 2.5, 12, 3);
   glPopMatrix();
 
