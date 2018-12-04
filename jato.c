@@ -262,7 +262,7 @@ void compoe_jato(void){
     glColor3f(0,0,0);
   glPopMatrix();
 
-  glPushMatrix(); // LATERAL DIREITA DA PORTA 2
+  glPushMatrix(); // LATERAL DIREITA DA PORTA
     glTranslatef(1.0, 0.1, -0.7);
     glRotatef(90,1,0,0);
     quadric = gluNewQuadric();
@@ -270,13 +270,31 @@ void compoe_jato(void){
     glColor3f(0,0,0);
   glPopMatrix();
 
-  glPushMatrix();//PORTA DIREITA
-  glTranslatef(0,-0.9,1.25);
+  glPushMatrix(); // SEPARAÇÂO DAS PORTAS LADO DIREITO
+    glTranslatef(1.0, 0.1, 1.15);
+    glRotatef(90,1,0,0);
+    quadric = gluNewQuadric();
+    gluCylinder(quadric, 0.05, 0.05, 1.2, 12, 3);
+    glColor3f(0,0,0);
+  glPopMatrix();
+
+  glPushMatrix();//PORTA DIREITA FRENTE 1
+  glTranslatef(0, -0.9, 2);
   glBegin(GL_QUADS);
-    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f,-1.55f);
-    glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 1.55f);
-    glTexCoord2fv(ctp[2]);  glVertex3f( 1.0f,-0.1f, 1.55f);
-    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-0.1f,-1.55f);
+    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f,-0.9f);
+    glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 0.9f);
+    glTexCoord2fv(ctp[2]);  glVertex3f( 1.0f,-0.1f, 0.9f);
+    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-0.1f,-0.9f);
+  glEnd();
+  glPopMatrix();
+
+  glPushMatrix();//PORTA DIREITA FRENTE 2
+  glTranslatef(0, -0.9, 0.16);
+  glBegin(GL_QUADS);
+    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f,-0.9f);
+    glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 0.9f);
+    glTexCoord2fv(ctp[2]);  glVertex3f( 1.0f,-0.1f, 0.9f);
+    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-0.1f,-0.9f);
   glEnd();
   glPopMatrix();
 
