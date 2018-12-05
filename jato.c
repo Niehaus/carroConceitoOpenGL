@@ -4,7 +4,6 @@
 #include <GL/glut.h>
 #include "png_texture.h"
 
-//#define PI 3.1415
 const float PI = 3.14;
 const float DEG2RAD = 3.14159/180;
 
