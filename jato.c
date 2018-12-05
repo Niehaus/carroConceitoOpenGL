@@ -293,7 +293,6 @@ void compoe_jato(void){
 
   glPushMatrix();//PORTA DIREITA FRENTE 1
   glTranslatef(0, -0.9, 2);
-  //glRotatef(-45,1.0f,1.0f,1.0f);
   glRotatef(rotacao_porta_direita1,1.0f,0.0f,1.0f);
   printf("rotação = %f\n",rotacao_porta_direita1 );
   glBegin(GL_QUADS);
@@ -315,6 +314,95 @@ void compoe_jato(void){
   glEnd();
   glPopMatrix();
 
+//OUTRO LADO DA PORTA - ESQUERDA------------------------------
+// ------------------------------
+glPushMatrix(); // LATERAL DIREITA DA PORTA
+  glTranslatef(-2.0, 0.1, 2.95);
+  glRotatef(90,1,0,0);
+  glRotatef(rotacao_cotovelo,1,0,0);
+  quadric = gluNewQuadric();
+  gluCylinder(quadric, 0.05, 0.05, 1.2, 12, 3);
+  glColor3f(0,0,0);
+glPopMatrix();
+
+glPushMatrix(); // PARTE DEBAIXO DA PORTA ESQUERDA
+  glTranslatef(-2.0, -1.06, -0.7);
+  quadric = gluNewQuadric();
+  gluCylinder(quadric, 0.05, 0.05, 3.6, 12, 3);
+  glColor3f(0,0,0);
+glPopMatrix();
+
+glPushMatrix(); // LATERAL DIREITA DA PORTA ESQUERDA
+  glTranslatef(-2.0, 0.1, -0.7);
+  glRotatef(90,1,0,0);
+  quadric = gluNewQuadric();
+  gluCylinder(quadric, 0.05, 0.05, 1.2, 12, 3);
+  glColor3f(0,0,0);
+glPopMatrix();
+
+glPushMatrix(); // SEPARAÇÂO DAS PORTAS LADO ESQUERDO
+  glTranslatef(-2.0, 0.1, 1.15);
+  glRotatef(90,1,0,0);
+  quadric = gluNewQuadric();
+  gluCylinder(quadric, 0.05, 0.05, 1.2, 12, 3);
+  glColor3f(0,0,0);
+glPopMatrix();
+
+glPushMatrix();//PORTA ESQUERDA FRENTE 1
+glTranslatef(-3.0, -0.9, 2);
+glRotatef(rotacao_porta_direita1,1.0f,0.0f,1.0f);
+printf("rotação = %f\n",rotacao_porta_direita1 );
+glBegin(GL_QUADS);
+  glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f,-0.9f);
+  glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 0.9f);
+  glTexCoord2fv(ctp[2]);  glVertex3f( 1.0f,-0.1f, 0.9f);
+  glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-0.1f,-0.9f);
+glEnd();
+glPopMatrix();
+
+glPushMatrix();//PORTA ESQUERDA FRENTE 2
+glTranslatef(-3.0, -0.9, 0.16);
+glRotatef(rotacao_porta_direita2,0.0f,1.0f,0.0f);
+glBegin(GL_QUADS);
+  glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f,-0.9f);
+  glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 0.9f);
+  glTexCoord2fv(ctp[2]);  glVertex3f( 1.0f,-0.1f, 0.9f);
+  glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-0.1f,-0.9f);
+glEnd();
+glPopMatrix();
+// ---------------------------------------
+// PARTE DE BAIXO DO CARRO
+
+
+glPushMatrix(); //PARTE DE BAIXO DO PARACHOQUE
+glTranslatef(0,-2,3.75);
+glBegin(GL_QUADS);
+  glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f, -0.75f);
+  glTexCoord2fv(ctp[1]);  glVertex3f(-2.0f, 1.0f, -0.75f);
+  glTexCoord2fv(ctp[2]);  glVertex3f(-2.0f, 1.0f,  2.25f);
+  glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f, 1.0f,  2.25f);
+glEnd();
+glPopMatrix();
+
+glPushMatrix(); //PARTE DE BAIXO DO PARACHOQUE
+glTranslatef(0,-2,-3.1);
+glBegin(GL_QUADS);
+  glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f, -0.75f);
+  glTexCoord2fv(ctp[1]);  glVertex3f(-2.0f, 1.0f, -0.75f);
+  glTexCoord2fv(ctp[2]);  glVertex3f(-2.0f, 1.0f,  2.25f);
+  glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f, 1.0f,  2.25f);
+glEnd();
+glPopMatrix();
+
+glPushMatrix(); //PARTE DE BAIXO DOS BANCOS
+glTranslatef(0,-2,0);
+glBegin(GL_QUADS);
+  glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f, -0.75f);
+  glTexCoord2fv(ctp[1]);  glVertex3f(-2.0f, 1.0f, -0.75f);
+  glTexCoord2fv(ctp[2]);  glVertex3f(-2.0f, 1.0f,  3.0f);
+  glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f, 1.0f,  3.0f);
+glEnd();
+glPopMatrix();
   // ---------------------------------------
   // VIDROS
 
