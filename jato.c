@@ -80,6 +80,19 @@ static void torus(int numc, int numt)
    }
 }
 
+void drawCircle(float radius)
+{
+   glBegin(GL_POLYGON);
+
+   for (int i=0; i<=360; i++)
+   {
+      float degInRad = i*DEG2RAD;
+      glVertex2f(cos(degInRad)*radius,sin(degInRad)*radius);
+   }
+
+   glEnd();
+}
+
 void compoe_jato(void){
   GLUquadricObj *quadric;
 
@@ -262,7 +275,7 @@ void compoe_jato(void){
     glColor3f(0,0,0);
   glPopMatrix();
 
-  glPushMatrix(); // LATERAL DIREITA DA PORTA 2
+  glPushMatrix(); // LATERAL DIREITA DA PORTA
     glTranslatef(1.0, 0.1, -0.7);
     glRotatef(90,1,0,0);
     quadric = gluNewQuadric();
@@ -270,13 +283,45 @@ void compoe_jato(void){
     glColor3f(0,0,0);
   glPopMatrix();
 
-  glPushMatrix();//PORTA DIREITA
-  glTranslatef(0,-0.9,1.25);
+  glPushMatrix(); // SEPARAÇÂO DAS PORTAS LADO DIREITO
+    glTranslatef(1.0, 0.1, 1.15);
+    glRotatef(90,1,0,0);
+    quadric = gluNewQuadric();
+    gluCylinder(quadric, 0.05, 0.05, 1.2, 12, 3);
+    glColor3f(0,0,0);
+  glPopMatrix();
+
+  glPushMatrix();//PORTA DIREITA FRENTE 1
+  glTranslatef(0, -0.9, 2);
   glBegin(GL_QUADS);
-    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f,-1.55f);
-    glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 1.55f);
-    glTexCoord2fv(ctp[2]);  glVertex3f( 1.0f,-0.1f, 1.55f);
-    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-0.1f,-1.55f);
+    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f,-0.9f);
+    glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 0.9f);
+    glTexCoord2fv(ctp[2]);  glVertex3f( 1.0f,-0.1f, 0.9f);
+    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-0.1f,-0.9f);
+  glEnd();
+  glPopMatrix();
+
+  glPushMatrix();//PORTA DIREITA FRENTE 2
+  glTranslatef(0, -0.9, 0.16);
+  glBegin(GL_QUADS);
+    glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f,-0.9f);
+    glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 0.9f);
+    glTexCoord2fv(ctp[2]);  glVertex3f( 1.0f,-0.1f, 0.9f);
+    glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-0.1f,-0.9f);
+  glEnd();
+  glPopMatrix();
+
+  // ---------------------------------------
+  // VIDROS
+
+  glPushMatrix();//PORTA DIREITA FRENTE 2
+  glTranslatef(0, -0.9, 0.16);
+  glColor3f(0.69, 0.88, 0.9);
+  glBegin(GL_QUADS);
+    glVertex3f( 1.0f, 1.0f,-0.9f);
+    glVertex3f( 1.0f, 1.0f, 0.9f);
+    glVertex3f( 1.0f, 1.5f, 0.9f);
+    glVertex3f( 1.0f, 1.5f,-0.9f);
   glEnd();
   glPopMatrix();
 
@@ -342,6 +387,13 @@ void compoe_jato(void){
     glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-1.0f, 2.0f);
     glEnd();
   glPopMatrix();
+
+  // ----------------------------------------------------
+  // RODAS
+
+  drawCircle(0.5f);
+
+
   /* cauda */
     /*glBegin(GL_POLYGON);
   glTexCoord2fv(cta[0]); glVertex3fv(cauda[0]);
@@ -484,6 +536,7 @@ void special(int key, int x, int y){
     glutPostRedisplay();
     break;
   }
+
 }
 
 void keyboard(unsigned char key, int x, int y){
