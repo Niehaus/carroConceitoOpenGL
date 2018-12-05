@@ -80,6 +80,19 @@ static void torus(int numc, int numt)
    }
 }
 
+void drawCircle(float radius)
+{
+   glBegin(GL_POLYGON);
+
+   for (int i=0; i<=360; i++)
+   {
+      float degInRad = i*DEG2RAD;
+      glVertex2f(cos(degInRad)*radius,sin(degInRad)*radius);
+   }
+
+   glEnd();
+}
+
 void compoe_jato(void){
   GLUquadricObj *quadric;
 
@@ -299,6 +312,20 @@ void compoe_jato(void){
   glPopMatrix();
 
   // ---------------------------------------
+  // VIDROS
+
+  glPushMatrix();//PORTA DIREITA FRENTE 2
+  glTranslatef(0, -0.9, 0.16);
+  glColor3f(0.69, 0.88, 0.9);
+  glBegin(GL_QUADS);
+    glVertex3f( 1.0f, 1.0f,-0.9f);
+    glVertex3f( 1.0f, 1.0f, 0.9f);
+    glVertex3f( 1.0f, 1.5f, 0.9f);
+    glVertex3f( 1.0f, 1.5f,-0.9f);
+  glEnd();
+  glPopMatrix();
+
+  // ---------------------------------------
   // PARTE TRASEIRA DO CARRO
 
   glPushMatrix(); //PARTE DE CIMA DO PARACHOQUE
@@ -360,6 +387,13 @@ void compoe_jato(void){
     glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-1.0f, 2.0f);
     glEnd();
   glPopMatrix();
+
+  // ----------------------------------------------------
+  // RODAS
+
+  drawCircle(0.5f);
+
+
   /* cauda */
     /*glBegin(GL_POLYGON);
   glTexCoord2fv(cta[0]); glVertex3fv(cauda[0]);
@@ -502,6 +536,7 @@ void special(int key, int x, int y){
     glutPostRedisplay();
     break;
   }
+
 }
 
 void keyboard(unsigned char key, int x, int y){
