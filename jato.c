@@ -29,7 +29,7 @@ GLfloat tetaxz=0;
 GLfloat raioxz=10;
 GLuint  jato;
 GLuint theTorus;
-
+GLfloat rotacao_porta_direita1 = -0.0f, rotacao_porta_direita2 = 0.0f,rotacao_cotovelo = 0.0f;
 
 GLfloat ctp[4][2]={
   {-COORD_TEXTURA_PLANO,-COORD_TEXTURA_PLANO},
@@ -263,6 +263,7 @@ void compoe_jato(void){
   glPushMatrix(); // LATERAL DIREITA DA PORTA
     glTranslatef(1.0, 0.1, 2.95);
     glRotatef(90,1,0,0);
+    glRotatef(rotacao_cotovelo,1,0,0);
     quadric = gluNewQuadric();
     gluCylinder(quadric, 0.05, 0.05, 1.2, 12, 3);
     glColor3f(0,0,0);
@@ -293,6 +294,9 @@ void compoe_jato(void){
 
   glPushMatrix();//PORTA DIREITA FRENTE 1
   glTranslatef(0, -0.9, 2);
+  //glRotatef(-45,1.0f,1.0f,1.0f);
+  glRotatef(rotacao_porta_direita1,1.0f,0.0f,1.0f);
+  printf("rotação = %f\n",rotacao_porta_direita1 );
   glBegin(GL_QUADS);
     glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f,-0.9f);
     glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 0.9f);
@@ -303,6 +307,7 @@ void compoe_jato(void){
 
   glPushMatrix();//PORTA DIREITA FRENTE 2
   glTranslatef(0, -0.9, 0.16);
+  glRotatef(rotacao_porta_direita2,0.0f,1.0f,0.0f);
   glBegin(GL_QUADS);
     glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f,-0.9f);
     glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 0.9f);
@@ -436,7 +441,7 @@ void compoe_jato(void){
 
 void display(void){
   glEnable(GL_DEPTH_TEST);
-
+  compoe_jato(); //redesenha
   //glDepthMask(GL_TRUE);
   glClearColor(1.0,1.0,1.0,1.0);
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -478,7 +483,7 @@ void display(void){
   // grava a transformacao atual
   glPushMatrix();
   glColor4f(COR_DO_PLANO);
-  glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+  glPolygonMode(GL_FRONT_AND_BACK, GL_FILL );
   glBindTexture(GL_TEXTURE_2D,textura_plano);
   glBegin(GL_QUADS);
   glTexCoord2fv(ctp[0]);  glVertex3f(-10,0,10);
@@ -557,9 +562,26 @@ void keyboard(unsigned char key, int x, int y){
     if(raioxz==0){
       raioxz=1;
     }
+    printf("dando zoom %f\n",raioxz );
+      glutPostRedisplay();
+      break;
+  case 'a':
+    printf("porta direita 1 antes = %f\n", rotacao_porta_direita1);
+    rotacao_porta_direita1-=2.1; rotacao_cotovelo+=4.1;
+    //rotacao_porta_direita2+=2.1;
+    printf("APERTANDO a\n");
+    printf("porta direita 1 = %f\n", rotacao_porta_direita1);
+    printf("porta direita 2 = %f\n", rotacao_porta_direita2);
     glutPostRedisplay();
-    break;
+    printf("FOI  OREDEDISPLAY PORRA\n" );
+      break;
+  case 's':
+    rotacao_porta_direita1+=2.1;
+    //rotacao_porta_direita2+=-2.1;
+    glutPostRedisplay();
+      break;
   }
+  glutPostRedisplay();
 }
 
 void carregar_texturas(void){
