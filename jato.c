@@ -20,6 +20,7 @@ GLint HEIGHT=700;
 
 GLfloat obs[3]={0.0,7.0,0.0};
 GLfloat look[3]={0.0,3.0,0.0};
+GLfloat rodas[360];
 GLuint  textura_plano;
 GLuint  textura_aviao;
 
@@ -87,6 +88,7 @@ void drawCircle(float radius)
    {
       float degInRad = i*DEG2RAD;
       glVertex2f(cos(degInRad)*radius,sin(degInRad)*radius);
+      rodas[i] = cos(degInRad)*radius,sin(degInRad)*radius;
    }
 
    glEnd();
@@ -120,9 +122,7 @@ void compoe_jato(void){
   /* corpo */
   quadric = gluNewQuadric();
   gluQuadricTexture(quadric, GL_TRUE);
-  //gluCylinder(quadric, 1, 1, 4, 12, 3);
 
-  /* nariz */
   quadric = gluNewQuadric();
   //gluQuadricTexture(quadric, GL_TRUE);
   //glBindTexture(GL_TEXTURE_2D, GL_TRUE);
@@ -189,7 +189,6 @@ void compoe_jato(void){
 
   // -------------------------------------------
   // VIDROS
-
   glPushMatrix(); // Lateral dos vidro direita
     glTranslatef(0.9,2.4,2.3);
     glRotatef(68,1,0,0);
@@ -368,6 +367,7 @@ glBegin(GL_QUADS);
   glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-0.1f,-0.9f);
 glEnd();
 glPopMatrix();
+
 // ---------------------------------------
 // PARTE DE BAIXO DO CARRO
 
@@ -479,9 +479,60 @@ glPopMatrix();
   glPopMatrix();
 
   // ----------------------------------------------------
-  // RODAS
+  // RODAS DIANTEIRA DIREITA
+  glPushMatrix();
+    glTranslatef(1.3, -1.0, 3.8);
+    glRotatef(90, 0, 1, 0);
+    drawCircle(0.5f);
+  glPopMatrix();
 
-  drawCircle(0.5f);
+  glPushMatrix();
+    glTranslatef(1.1, -1.0, 3.8);
+    glRotatef(90, 0, 1, 0);
+    drawCircle(0.5f);
+  glPopMatrix();
+
+  // ----------------------------------------------------
+  // RODAS DIANTEIRA ESQUERDA
+  glPushMatrix();
+    glTranslatef(-2.3, -1.0, 3.8);
+    glRotatef(90, 0, 1, 0);
+    drawCircle(0.5f);
+  glPopMatrix();
+
+  glPushMatrix();
+    glTranslatef(-2.1, -1.0, 3.8);
+    glRotatef(90, 0, 1, 0);
+    drawCircle(0.5f);
+  glPopMatrix();
+
+  // ----------------------------------------------------
+  // RODAS TRASEIRA ESQUERDA
+  glPushMatrix();
+    glTranslatef(-2.3, -1.0, -1.5);
+    glRotatef(90, 0, 1, 0);
+    drawCircle(0.5f);
+  glPopMatrix();
+
+  glPushMatrix();
+    glTranslatef(-2.1, -1.0, -1.5);
+    glRotatef(90, 0, 1, 0);
+    drawCircle(0.5f);
+  glPopMatrix();
+
+  // ----------------------------------------------------
+  // RODAS TRASEIRA DIREITA
+  glPushMatrix();
+    glTranslatef(1.3, -1.0, -1.5);
+    glRotatef(90, 0, 1, 0);
+    drawCircle(0.5f);
+  glPopMatrix();
+
+  glPushMatrix();
+    glTranslatef(1.1, -1.0, -1.5);
+    glRotatef(90, 0, 1, 0);
+    drawCircle(0.5f);
+  glPopMatrix();
 
 
   /* cauda */
