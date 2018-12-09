@@ -29,7 +29,7 @@ GLfloat tetaxz=0;
 GLfloat raioxz=10;
 GLuint  jato;
 GLuint theTorus;
-GLfloat rotacao_porta_direita1 = -0.0f, rotacao_porta_direita2 = 0.0f,rotacao_cotovelo = 0.0f;
+GLfloat rotacao_porta_direita1 = -0.0f, rotacao_porta_direita2 = 0.0f,rotacao_cotovelo = 0.0f, rotacao_roda = 90.0f;
 
 GLfloat ctp[4][2]={
   {-COORD_TEXTURA_PLANO,-COORD_TEXTURA_PLANO},
@@ -370,8 +370,6 @@ glPopMatrix();
 
 // ---------------------------------------
 // PARTE DE BAIXO DO CARRO
-
-
 glPushMatrix(); //PARTE DE BAIXO DO PARACHOQUE
 glTranslatef(0,-2,3.75);
 glBegin(GL_QUADS);
@@ -482,13 +480,13 @@ glPopMatrix();
   // RODAS DIANTEIRA DIREITA
   glPushMatrix();
     glTranslatef(1.3, -1.0, 3.8);
-    glRotatef(90, 0, 1, 0);
+    glRotatef(rotacao_roda, 0, 1, 0);
     drawCircle(0.5f);
   glPopMatrix();
 
   glPushMatrix();
     glTranslatef(1.1, -1.0, 3.8);
-    glRotatef(90, 0, 1, 0);
+    glRotatef(rotacao_roda, 0, 1, 0);
     drawCircle(0.5f);
   glPopMatrix();
 
@@ -496,13 +494,13 @@ glPopMatrix();
   // RODAS DIANTEIRA ESQUERDA
   glPushMatrix();
     glTranslatef(-2.3, -1.0, 3.8);
-    glRotatef(90, 0, 1, 0);
+    glRotatef(rotacao_roda, 0, 1, 0);
     drawCircle(0.5f);
   glPopMatrix();
 
   glPushMatrix();
     glTranslatef(-2.1, -1.0, 3.8);
-    glRotatef(90, 0, 1, 0);
+    glRotatef(rotacao_roda, 0, 1, 0);
     drawCircle(0.5f);
   glPopMatrix();
 
@@ -715,6 +713,14 @@ void keyboard(unsigned char key, int x, int y){
     rotacao_porta_direita2+=-2.1; if(rotacao_porta_direita2 < -0.2) rotacao_porta_direita2 = -0.2;
     glutPostRedisplay();
       break;
+  case 'w':
+    rotacao_roda+=1.0; if(rotacao_roda > 110) rotacao_roda = 110;
+    glutPostRedisplay();
+    break;
+  case 'd':
+    rotacao_roda-=1.0; if(rotacao_roda < 70) rotacao_roda = 70;
+    glutPostRedisplay();
+    break;
   }
   glutPostRedisplay();
 }
