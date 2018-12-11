@@ -20,7 +20,8 @@ GLint HEIGHT=700;
 
 GLfloat obs[3]={0.0,7.0,0.0};
 GLfloat look[3]={0.0,3.0,0.0};
-GLfloat rodas[360];
+GLfloat rodas[1000];
+GLfloat rodas2[1000];
 GLuint  textura_plano;
 GLuint  textura_carro;
 
@@ -29,7 +30,7 @@ GLfloat tetaxz=0;
 GLfloat raioxz=10;
 GLuint  carro;
 GLuint theTorus;
-GLfloat rotacao_porta_direita1 = -0.0f, rotacao_porta_direita2 = 0.0f,rotacao_cotovelo = 0.0f, rotacao_roda = 90.0f;
+GLfloat rotacao_porta_direita1 = -0.0f, rotacao_porta_direita2 = 0.0f,rotacao_cotovelo = 0.0f, rotacao_roda = 90.0f, base = 0.0f;
 
 GLfloat ctp[4][2]={
   {-COORD_TEXTURA_PLANO,-COORD_TEXTURA_PLANO},
@@ -84,11 +85,12 @@ void drawCircle(float radius)
 {
    glBegin(GL_POLYGON);
 
-   for (int i=0; i<=360; i++)
+   for (int i=0; i <= 1000; i++)
    {
       float degInRad = i*DEG2RAD;
       glVertex2f(cos(degInRad)*radius,sin(degInRad)*radius);
-      rodas[i] = cos(degInRad)*radius,sin(degInRad)*radius;
+      rodas[i] = cos(degInRad)*radius;
+      rodas2[i] = sin(degInRad)*radius;
    }
 
    glEnd();
@@ -487,7 +489,35 @@ void compoe_carro(void){
     glRotatef(rotacao_roda, 0, 1, 0);
     drawCircle(0.5f);
   glPopMatrix();
+ //### TESTE RODA ### /*
 
+ /*glPushMatrix();
+  			glTranslatef(-5.75f, -6.00f, 3.40f);
+  			glRotatef(rotacao_roda, 0, 0, 1);
+  			glRotatef(base, 0, 1, 0);
+  			glutSolidTorus(4.0, 11.6, 8, 8);
+  		glPopMatrix();
+
+  		glPushMatrix();
+  			glTranslatef(-5.75f, -6.0f, 3.40f);
+  			glColor3f(0.41, 0.41, 0.41);
+  			glRotatef(rotacao_roda, 0, 0, 1);
+			glRotatef(90, 1, 0, 0);
+  			gluCylinder(quadric, 1.0, 1.0, 10.0, 30, 30);
+  			glRotatef(180, 1, 0, 0);
+  			gluCylinder(quadric, 1.0, 1.0, 10.0, 30, 30);
+  		glPopMatrix();
+
+  		glPushMatrix();
+  			glTranslatef(-5.75f, -6.0f, 3.40f);
+  			glRotatef(90, 0, 1, 0);
+  			glRotatef(base, 0, 1, 0);
+  			glRotatef(-rotacao_roda, 1, 0, 0);
+  			gluCylinder(quadric, 1.0, 1.0, 10.0, 30, 30);
+  			glRotatef(180, 0, 1, 0);
+  			gluCylinder(quadric, 1.0, 1.0, 10.0, 30, 30);
+glPopMatrix();
+*/
   // ----------------------------------------------------
   // RODAS DIANTEIRA ESQUERDA
   glPushMatrix();
@@ -524,12 +554,34 @@ void compoe_carro(void){
     drawCircle(0.5f);
   glPopMatrix();
 
+
   glPushMatrix();
     glTranslatef(1.1, -1.0, -1.5);
     glRotatef(90, 0, 1, 0);
     drawCircle(0.5f);
   glPopMatrix();
 
+
+  glPushMatrix();
+     GLfloat graus = 0.0f;
+     glTranslatef(2.0,2.0,1.0);
+     glScalef(0.5f,1,1);
+      glBegin(GL_QUAD_STRIP);
+     for (int i = 0; i < 1000; i++) {
+       printf("%f\n",graus );
+      // glRotatef(graus,1,0,0);
+
+       //glVertex3f(0.0f, 0.0f, 0.0f);
+       glVertex3f(0.5f,rodas2[i],rodas[i]);
+      // glVertex3f(0f, 0.0f, 0.0f);
+       glVertex3f(-0.5f,rodas2[i],rodas[i]);
+       printf("O QUE TEM AQUI%f",rodas[0]);
+       printf(" até -> %f\n",-rodas[i] );;
+
+       graus+=1;
+     }
+     glEnd();
+   glPopMatrix();
 
   /* cauda */
     /*glBegin(GL_POLYGON);
