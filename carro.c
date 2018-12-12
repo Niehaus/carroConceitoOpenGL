@@ -558,17 +558,7 @@ void compoe_carro(void){
      glEnd();
   glPopMatrix();
 
-  // ---------------------------------
-  /* cabine do piloto */
-//  glTranslatef(0,1,3.5);
-//  glPushMatrix();
-//  glScalef(0.7,0.7,2.0);
-//  quadric=gluNewQuadric();
-//  glColor4f(0.3,0.5,1,0.5);
-//  glDisable(GL_TEXTURE_2D);
-//  gluSphere(quadric,0.5,12,12);
-//  glPopMatrix();
-
+  // --------------------------------
 // Volante
 glPushMatrix();
 glTranslatef(0,0,2.8f);
