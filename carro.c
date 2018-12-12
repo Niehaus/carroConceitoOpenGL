@@ -74,7 +74,7 @@ static void torus(int numc, int numt)
             x = (1+.1*cos(s*twopi/numc))*cos(t*twopi/numt);
             y = (1+.1*cos(s*twopi/numc))*sin(t*twopi/numt);
             z = .1 * sin(s * twopi / numc);
-            glVertex3f(x, y, z);
+            glVertex3f(x/2, y/2, z/2);
          }
       }
       glEnd();
@@ -85,7 +85,7 @@ void drawCircle(float radius)
 {
    glBegin(GL_POLYGON);
 
-   for (int i=0; i <= 1000; i++)
+   for (int i=0; i < 1000; i++)
    {
       float degInRad = i*DEG2RAD;
       glVertex2f(cos(degInRad)*radius,sin(degInRad)*radius);
@@ -114,13 +114,6 @@ void compoe_carro(void){
   /* inicia a composicao do carro */
   carro = glGenLists(1);
   glNewList(carro, GL_COMPILE);
-  /* asas */
-//  glBegin(GL_TRIANGLES);
-//  glTexCoord2fv(cta[0]); glVertex3fv(asa[0]);
-//  glTexCoord2fv(cta[1]); glVertex3fv(asa[1]);
-//  glTexCoord2fv(cta[3]); glVertex3fv(asa[2]);
-//  glEnd();
-
   /* corpo */
   quadric = gluNewQuadric();
   gluQuadricTexture(quadric, GL_TRUE);
@@ -349,7 +342,6 @@ void compoe_carro(void){
 
   glPushMatrix();//PORTA ESQUERDA FRENTE 1
     glTranslatef(-3.0, -0.9, 2);
-    //glRotatef(-rotacao_porta_direita1,0.0f,1.0f,0.0f);
     glBegin(GL_QUADS);
       glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f,-0.9f);
       glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 0.9f);
@@ -360,7 +352,6 @@ void compoe_carro(void){
 
   glPushMatrix();//PORTA ESQUERDA FRENTE 2
     glTranslatef(-3.0, -0.9, 0.16);
-    //glRotatef(-rotacao_porta_direita2,0.0f,1.0f,0.0f);
     glBegin(GL_QUADS);
       glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 1.0f,-0.9f);
       glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f, 0.9f);
@@ -398,19 +389,6 @@ void compoe_carro(void){
       glTexCoord2fv(ctp[1]);  glVertex3f(-2.0f, 1.0f, -0.75f);
       glTexCoord2fv(ctp[0]);  glVertex3f(-2.0f, 1.0f,  3.0f);
       glTexCoord2fv(ctp[1]);  glVertex3f( 1.0f, 1.0f,  3.0f);
-    glEnd();
-  glPopMatrix();
-
-  // ---------------------------------------
-  // VIDROS
-  glPushMatrix();//PORTA DIREITA FRENTE 2
-    glTranslatef(0, -0.9, 0.16);
-    glColor3f(0.69, 0.88, 0.9);
-    glBegin(GL_QUADS);
-      glVertex3f( 1.0f, 1.0f,-0.9f);
-      glVertex3f( 1.0f, 1.0f, 0.9f);
-      glVertex3f( 1.0f, 1.5f, 0.9f);
-      glVertex3f( 1.0f, 1.5f,-0.9f);
     glEnd();
   glPopMatrix();
 
@@ -489,35 +467,20 @@ void compoe_carro(void){
     glRotatef(rotacao_roda, 0, 1, 0);
     drawCircle(0.5f);
   glPopMatrix();
- //### TESTE RODA ### /*
 
- /*glPushMatrix();
-  			glTranslatef(-5.75f, -6.00f, 3.40f);
-  			glRotatef(rotacao_roda, 0, 0, 1);
-  			glRotatef(base, 0, 1, 0);
-  			glutSolidTorus(4.0, 11.6, 8, 8);
-  		glPopMatrix();
+  glPushMatrix();
+    glTranslatef(1.3, -1.0, 3.8);
+    glRotatef(-90,0,1,0);
+    glRotatef(rotacao_roda, 0, 1, 0);
+    glScalef(0.5f,1,1);
+    glBegin(GL_QUAD_STRIP);
+     for (int i = 0; i < 1000; i++) {
+       glVertex3f(0.5f,rodas2[i],rodas[i]);
+       glVertex3f(-0.5f,rodas2[i],rodas[i]);
+     }
+     glEnd();
+  glPopMatrix();
 
-  		glPushMatrix();
-  			glTranslatef(-5.75f, -6.0f, 3.40f);
-  			glColor3f(0.41, 0.41, 0.41);
-  			glRotatef(rotacao_roda, 0, 0, 1);
-			glRotatef(90, 1, 0, 0);
-  			gluCylinder(quadric, 1.0, 1.0, 10.0, 30, 30);
-  			glRotatef(180, 1, 0, 0);
-  			gluCylinder(quadric, 1.0, 1.0, 10.0, 30, 30);
-  		glPopMatrix();
-
-  		glPushMatrix();
-  			glTranslatef(-5.75f, -6.0f, 3.40f);
-  			glRotatef(90, 0, 1, 0);
-  			glRotatef(base, 0, 1, 0);
-  			glRotatef(-rotacao_roda, 1, 0, 0);
-  			gluCylinder(quadric, 1.0, 1.0, 10.0, 30, 30);
-  			glRotatef(180, 0, 1, 0);
-  			gluCylinder(quadric, 1.0, 1.0, 10.0, 30, 30);
-glPopMatrix();
-*/
   // ----------------------------------------------------
   // RODAS DIANTEIRA ESQUERDA
   glPushMatrix();
@@ -532,6 +495,18 @@ glPopMatrix();
     drawCircle(0.5f);
   glPopMatrix();
 
+  glPushMatrix();
+    glTranslatef(-2.3, -1.0, 3.8);
+    glRotatef(-90,0,1,0);
+    glRotatef(rotacao_roda, 0, 1, 0);
+    glScalef(0.5f,1,1);
+    glBegin(GL_QUAD_STRIP);
+     for (int i = 0; i < 1000; i++) {
+       glVertex3f(0.5f,rodas2[i],rodas[i]);
+       glVertex3f(-0.5f,rodas2[i],rodas[i]);
+     }
+     glEnd();
+  glPopMatrix();
   // ----------------------------------------------------
   // RODAS TRASEIRA ESQUERDA
   glPushMatrix();
@@ -544,6 +519,17 @@ glPopMatrix();
     glTranslatef(-2.1, -1.0, -1.5);
     glRotatef(90, 0, 1, 0);
     drawCircle(0.5f);
+  glPopMatrix();
+
+  glPushMatrix();
+     glTranslatef(-2.3, -1.0, -1.5);
+     glScalef(0.5f,1,1);
+     glBegin(GL_QUAD_STRIP);
+     for (int i = 0; i < 1000; i++) {
+       glVertex3f(0.5f,rodas2[i],rodas[i]);
+       glVertex3f(-0.5f,rodas2[i],rodas[i]);
+     }
+     glEnd();
   glPopMatrix();
 
   // ----------------------------------------------------
@@ -561,54 +547,18 @@ glPopMatrix();
     drawCircle(0.5f);
   glPopMatrix();
 
-
   glPushMatrix();
-     GLfloat graus = 0.0f;
-     glTranslatef(2.0,2.0,1.0);
-     glScalef(0.5f,1,1);
-      glBegin(GL_QUAD_STRIP);
+    glTranslatef(1.3, -1.0, -1.5);
+    glScalef(0.5f,1,1);
+    glBegin(GL_QUAD_STRIP);
      for (int i = 0; i < 1000; i++) {
-       printf("%f\n",graus );
-      // glRotatef(graus,1,0,0);
-
-       //glVertex3f(0.0f, 0.0f, 0.0f);
        glVertex3f(0.5f,rodas2[i],rodas[i]);
-      // glVertex3f(0f, 0.0f, 0.0f);
        glVertex3f(-0.5f,rodas2[i],rodas[i]);
-       printf("O QUE TEM AQUI%f",rodas[0]);
-       printf(" até -> %f\n",-rodas[i] );;
-
-       graus+=1;
      }
      glEnd();
-   glPopMatrix();
-
-  /* cauda */
-    /*glBegin(GL_POLYGON);
-  glTexCoord2fv(cta[0]); glVertex3fv(cauda[0]);
-  glTexCoord2fv(cta[1]); glVertex3fv(cauda[1]);
-  glTexCoord2fv(cta[2]); glVertex3fv(cauda[2]);
-  glTexCoord2fv(cta[3]); glVertex3fv(cauda[3]);
-  glEnd();*/
+  glPopMatrix();
 
   // ---------------------------------
-
-  // Volante
-  /*glTranslatef(0,0,2.8);
-  theTorus = glGenLists (2);
-  glNewList(theTorus, GL_COMPILE);
-  torus(4, 25);
-  //glTranslatef(1,-1,0);
-  //glRotatef(90,0,1,0);
-  //torus(9500, 25);
-  glEndList();
-
-  quadric = gluNewQuadric();
-  gluQuadricTexture(quadric,GL_TRUE);
-  glPushMatrix();
-  glTranslatef(2,0,4);
-  glPopMatrix();*/
-
   /* cabine do piloto */
 //  glTranslatef(0,1,3.5);
 //  glPushMatrix();
@@ -619,6 +569,69 @@ glPopMatrix();
 //  gluSphere(quadric,0.5,12,12);
 //  glPopMatrix();
 
+// Volante
+glPushMatrix();
+glTranslatef(0,0,2.8f);
+theTorus = glGenLists (2);
+glNewList(theTorus, GL_COMPILE);
+torus(4, 25);
+glPopMatrix();
+
+glPushMatrix(); // haste do Volante
+  glTranslatef(0,0.5f,2.8f);
+  glRotatef(68,1,0,0);
+  quadric = gluNewQuadric();
+  gluCylinder(quadric, 0.05, 0.05, 0.5, 12, 1);
+  glColor3f(0,0,0);
+glPopMatrix();
+
+glPushMatrix(); // haste 2 do Volante
+  glTranslatef(0,-0.5f,2.8f);
+  glRotatef(-68,1,0,0);
+  quadric = gluNewQuadric();
+  gluCylinder(quadric, 0.05, 0.05, 0.6, 12, 1);
+  glColor3f(0,0,0);
+glPopMatrix();
+
+glPushMatrix(); // haste 3 do Volante
+  glTranslatef(0.5f,0,2.8f);
+  glRotatef(-68,0,1,0);
+  quadric = gluNewQuadric();
+  gluCylinder(quadric, 0.05, 0.05, 0.5, 12, 1);
+  glColor3f(0,0,0);
+glPopMatrix();
+
+glPushMatrix(); // haste 4 do Volante
+  glTranslatef(-0.5f,0,2.8f);
+  glRotatef(68,0,1,0);
+  quadric = gluNewQuadric();
+  gluCylinder(quadric, 0.05, 0.05, 0.5, 12, 1);
+  glColor3f(0,0,0);
+glPopMatrix();
+
+glPushMatrix();
+glTranslatef(0,0,1);
+
+// FECHA PAINEL
+glBegin(GL_QUADS);
+  glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 0.1f, 2.0f);
+  glTexCoord2fv(ctp[1]);  glVertex3f(-2.0f, 0.1f, 2.0f);
+  glTexCoord2fv(ctp[2]);  glVertex3f(-2.0f,-1.0f, 2.0f);
+  glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-1.0f, 2.0f);
+  glEnd();
+glPopMatrix();
+
+
+// FECHA PAINEL TRADEIRO
+glPushMatrix();
+glTranslatef(0,0,-2.8f);
+glBegin(GL_QUADS);
+  glTexCoord2fv(ctp[0]);  glVertex3f( 1.0f, 0.1f, 2.0f);
+  glTexCoord2fv(ctp[1]);  glVertex3f(-2.0f, 0.1f, 2.0f);
+  glTexCoord2fv(ctp[2]);  glVertex3f(-2.0f,-1.0f, 2.0f);
+  glTexCoord2fv(ctp[3]);  glVertex3f( 1.0f,-1.0f, 2.0f);
+  glEnd();
+glPopMatrix();
   /* termina a composicao do carro*/
   glEndList();
 }
